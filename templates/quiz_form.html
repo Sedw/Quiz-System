@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ 'Edit Quiz' if form.category.data else 'Add Quiz' }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/admin/quiz">لیست کوییز ها</a>
+                <a class="nav-item nav-link active" href="/admin/quiz/add">افزودن کوییز</a>
+                <a class="nav-item nav-link" href="/quiz">همه ی کوییز ها</a>
+                <a class="nav-item nav-link" href="/admin/quiz/history">تاریخچه کوییز ها</a>
+                <a class="nav-item nav-link" href="/admin/users">لیست کاربران</a>
+                <a class="nav-item nav-link" href="/logout">خروج</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1>{{ 'ویرایش کوییز' if form.category.data else 'افزودن کوییز' }}</h1>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {{ form.hidden_tag() }}
+
+                            <div class="mb-3">
+                                <label for="category" class="form-label">دسته بندی</label>
+                                {{ form.category(class_="form-select") }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="question" class="form-label">سوال</label>
+                                {{ form.question(class_="form-control") }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="answer" class="form-label">جواب</label>
+                                {{ form.answer(class_="form-control") }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="option_1" class="form-label">گزینه ۱</label>
+                                {{ form.option_1(class_="form-control") }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="option_2" class="form-label">گزینه ۲</label>
+                                {{ form.option_2(class_="form-control") }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="option_3" class="form-label">گزینه ۳</label>
+                                {{ form.option_3(class_="form-control") }}
+                            </div>
+
+                            <div class="d-grid">
+                                {{ form.submit(class_="btn btn-primary") }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

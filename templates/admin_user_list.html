@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin User List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/admin/quiz">لیست کوییز ها</a>
+                <a class="nav-item nav-link" href="/admin/quiz/add">افزودن کوییز</a>
+                <a class="nav-item nav-link" href="/quiz">همه ی کوییز ها</a>
+                <a class="nav-item nav-link" href="/admin/quiz/history">تاریخچه کوییز ها</a>
+                <a class="nav-item nav-link active" href="/admin/users">لیست کاربران</a>
+                <a class="nav-item nav-link" href="/logout">خروج</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1>لیست کاربران</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>شناسه</th>
+                    <th>نام کاربری</th>
+                    <th>امتیاز</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.score }}</td>
+                    <td>
+                        <!-- Add actions if needed, e.g., edit, delete -->
+                        <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('admin_quiz_list') }}" class="btn btn-primary">برگشتن به کوییز ها</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
