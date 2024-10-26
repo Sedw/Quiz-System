@@ -17,7 +17,7 @@ class Quiz(db.Model):
 @app.before_request
 def create_tables():
     db.create_all()
-    if not Question.query.first():
+    if not Quiz.query.first():
         sample_quizzes = [
             Quiz(category="Category 1", question="Question 1?", answer="Answer 1", option_1="Option 1A", option_2="Option 1B", option_3="Option 1C"),
             Quiz(category="Category 1", question="Question 2?", answer="Answer 2", option_1="Option 2A", option_2="Option 2B", option_3="Option 2C"),
