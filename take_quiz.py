@@ -6,7 +6,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'supersecretkey'
 db = SQLAlchemy(app)
-class Quiz(db.Model):
+class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(255), nullable=False)
     question = db.Column(db.String(255), nullable=False)
@@ -17,11 +17,11 @@ class Quiz(db.Model):
 @app.before_request
 def create_tables():
     db.create_all()
-    if not Quiz.query.first():
+    if not Question.query.first():
         sample_quizzes = [
-            Quiz(category="Category 1", question="Question 1?", answer="Answer 1", option_1="Option 1A", option_2="Option 1B", option_3="Option 1C"),
-            Quiz(category="Category 1", question="Question 2?", answer="Answer 2", option_1="Option 2A", option_2="Option 2B", option_3="Option 2C"),
-            Quiz(category="Category 2", question="Question 3?", answer="Answer 3", option_1="Option 3A", option_2="Option 3B", option_3="Option 3C"),
+            Question(category="Category 1", question="Question 1?", answer="Answer 1", option_1="Option 1A", option_2="Option 1B", option_3="Option 1C"),
+            Question(category="Category 1", question="Question 2?", answer="Answer 2", option_1="Option 2A", option_2="Option 2B", option_3="Option 2C"),
+            Question(category="Category 2", question="Question 3?", answer="Answer 3", option_1="Option 3A", option_2="Option 3B", option_3="Option 3C"),
         ]
         db.session.bulk_save_objects(sample_quizzes)
         db.session.commit()
