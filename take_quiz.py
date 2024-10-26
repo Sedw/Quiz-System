@@ -1,18 +1,17 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import random
-app = Flask(name)
+app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(255), nullable=False)
     answer = db.Column(db.String(255), nullable=False)
     category_id = db.Column(db.Integer, nullable=False)
 
-@app.before_first_request
+@app.before_request
 def create_tables():
     db.create_all()
     if not Question.query.first():
@@ -35,8 +34,8 @@ def submit_feedback():
     feedback_data = request.json
     feedback_text = feedback_data.get('feedback')
     if feedback_text:
-        return jsonify({'message': 'Feedback submitted successfully!'}), 201
-    return jsonify({'message': 'Feedback cannot be empty!'}), 400
+        return jsonify({'message': 'Feedback ba movafaghiat sabt shod!'}), 201
+    return jsonify({'message': 'Feedback nemitavanad khali bashad!'}), 400
 
-if name == 'main':
+if __name__ == '__main__':
     app.run(debug=True)
